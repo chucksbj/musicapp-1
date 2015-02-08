@@ -23,7 +23,9 @@ module.exports = function(grunt) {
               dest: '.tmp/public'
           },{
               expand: true,
-              cwd: './bower_components',
+              // bower_components moved here
+              // by the .bowerrc file
+              cwd: './assets/js/vendor',
               src: [
               	  'html5-boilerplate/js/vendor/modernizr-2.6.2.min.js',
                   'angular/angular.js',
@@ -37,7 +39,7 @@ module.exports = function(grunt) {
               dest: '.tmp/public/js/dependencies'
           },{ // add bootstrap css
                  expand: true,
-                 cwd: './bower_components',
+                 cwd: './assets/js/vendor',
                  src: [
                  'html5-boilerplate/css/normalize.css',
                  'html5-boilerplate/css/main.css',

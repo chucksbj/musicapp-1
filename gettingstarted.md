@@ -1,9 +1,19 @@
 # Getting Started - Installs
 
 1. Install node.js - http://nodejs.org/
+
 2. Install sails.js globaly - http://sailsjs.org/#/
-3. Install bower globaly - sudo npm install bower -g
+```
+ sudo npm install sails@beta -g
+```
+
+3. Install bower globaly
+```
+sudo npm install bower -g
+```
+
 3. Install mongodb as a service - http://www.mongodb.org/
+
 4. Write the application (see below)
 
 
@@ -29,7 +39,7 @@
 
 4. View the app in a browser
 * http://localhost:1337
-* http://localhost:1337/music/
+
 
 ## Generated REST API websocket endpoints for entities
 * user

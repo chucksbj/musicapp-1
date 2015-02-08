@@ -15,7 +15,7 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'vendor/**/*.css',
+  'js/vendor/**/*.css',
   'styles/**/*.css'
 ];
 
@@ -23,7 +23,7 @@ var cssFilesToInject = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-  'vendor/**/*.js',
+  'js/vendor/**/*.js',
   
   // Load sails.io before everything else
   'js/dependencies/sails.io.js',
@@ -44,8 +44,7 @@ var jsFilesToInject = [
 // By default, Sails uses JST templates and precompiles them into
 // functions for you.  If you want to use jade, handlebars, dust, etc.,
 // with the linker, no problem-- you'll just want to make sure the precompiled
-// templates get spit out to the same file.  Be sure and check out 
-// `tasks/README.md`
+// templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
   'templates/**/*.html'
