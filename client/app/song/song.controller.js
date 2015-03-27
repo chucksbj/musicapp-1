@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('musicappApp')
-  .controller('SongCtrl', function ($scope, $http, $scope) {
+  .controller('SongCtrl', function ($scope, $http) {
   	$scope.songs = [];
 
     $http.get('/api/song').success(function(songs) {
