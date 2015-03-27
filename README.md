@@ -29,6 +29,8 @@ heroku addons:add mongolab
 ```
 
 Heroku build and deploy
+Note: After executing the commands below
+the dist folder now points to the heroku git repository
 
 ```
 yo angular-fillstack:heroku
@@ -38,3 +40,5 @@ git push heroku master
 # View on heroku cloud by
 heroku open
 ```
+See https://lw-mussicapp.heroku.com/
+and https://lw-musicapp.heroku.com/song
