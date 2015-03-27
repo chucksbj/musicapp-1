@@ -1,3 +1,19 @@
-<div class="col-md-12">
-This is the song view.
+<!-- client/app/main/main.html -->
+ 
+<div ng-include="'components/navbar/navbar.html'"></div>
+ 
+<div class="container">
+ 
+  <form class="song-form" ng-submit="addSong()" name="songForm">
+    Title: <input class="form-control" ng-model="song.title" rows="3" placeholder="Song title" required></input>
+    Words: <textarea class="form-control" ng-model="song.words" rows="3" placeholder="Words" required></textarea>
+    <input class="btn btn-primary" type="submit" ng-disabled="songForm.$invalid" value="Post">
+  </form>
+ 
+  <ul class="song-list">
+    <li ng-repeat="song in songs">
+      <header>{{ song.title}}</header>
+      <p>{{ song.words }}</p>
+    </li>
+  </ul>
 </div>
