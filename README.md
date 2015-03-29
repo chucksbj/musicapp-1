@@ -3,6 +3,7 @@
 ## Create method
 ```
 yo angular-fullstack mussicapp
+yo angular-fullstack:endpoint song
 yo angular-fullstack:route song
 ```
 

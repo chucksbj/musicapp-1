@@ -5,6 +5,10 @@ angular.module('musicappApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },
+    {
+      'title': 'Songs',
+      'link': '/song'
     }];
 
     $scope.isCollapsed = true;
