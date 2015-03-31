@@ -6,7 +6,7 @@ angular.module('musicappApp')
 
     $http.get('/api/songs').success(function(songs) {
       $scope.songs = songs;
-      socket.syncUpdates('songs', $scope.songs);
+      socket.syncUpdates('song', $scope.songs);
     });
 
     $scope.addSong = function() {

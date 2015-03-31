@@ -5,11 +5,16 @@
 <div class="container">
  
   <form class="song-form" ng-submit="addSong()" name="songForm">
-    Title: <input class="form-control" ng-model="song.title" rows="3" placeholder="Song title" required></input>
-    Words: <textarea class="form-control" ng-model="song.words" rows="3" placeholder="Words" required></textarea>
+    
 
     <p class="input-group">
-      <input type="text" class="form-control" placeholder="Add a new song." ng-model="newSong">
+      <label>Title</p><label>
+      <input class="form-control" ng-model="song.title" placeholder="Song title" required></input>
+      <label>Words</label>
+      <textarea class="form-control" ng-model="song.words" rows="3" placeholder="Words" required></textarea>
+      <label>Key<label>
+      <input class="form-control" nf-model="song.start_key" placeholder="Starting Key"></input>
+      <input class="form-control" nf-model="song.aux_key" placeholder="Other Keys"></input>
       <span class="input-group-btn">
         <button type="submit" class="btn btn-primary" ng-disabled="songForm.$invalid"
           ng-click="addSong()">Add New</button>
@@ -19,8 +24,10 @@
  
   <ul class="song-list">
     <li ng-repeat="song in songs">
-      <header>{{ song.title}}</header>
-      <p>{{ song.words }}</p>
+      <div>{{ song.title}}</div>
+      <div>{{ song.start_key }}</div>
+      <div>{{ song.aux_key }}</div>
+      <div>{{ song.words }}</div>
     </li>
   </ul>
 </div>

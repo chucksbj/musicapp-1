@@ -9,6 +9,10 @@ angular.module('musicappApp')
     {
       'title': 'Songs',
       'link': '/song'
+    },
+    {
+      'title': 'Instrument',
+      'link': '/instrument'
     }];
 
     $scope.isCollapsed = true;

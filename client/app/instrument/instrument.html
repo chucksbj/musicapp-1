@@ -1,0 +1,13 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+ 
+<div class="container">
+ 
+  <ul class="instrument-list">
+    <li ng-repeat="inst in instruments">
+      <div>{{ instr.name}}</div>
+      <div>{{ instr.info }}</div>
+    </li>
+  </ul>
+
+</div>
+
