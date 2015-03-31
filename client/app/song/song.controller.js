@@ -2,7 +2,8 @@
 
 angular.module('musicappApp')
   .controller('SongCtrl', function ($scope, $http, socket) {
-    $scope.songs = [];
+    $scope.song = {};
+   $scope.songs = [];
 
     $http.get('/api/songs').success(function(songs) {
       $scope.songs = songs;
@@ -10,11 +11,14 @@ angular.module('musicappApp')
     });
 
     $scope.addSong = function() {
-      if($scope.newSong === '') {
+      if($scope.song === '') {
         return;
       }
-      $http.post('/api/songs', { name: $scope.newSong });
-      $scope.newSong = '';
+      $http.post('/api/songs', { title: $scope.song.title,
+                                 words: $scope.song.words,
+                                 startKey: $scope.song.startKey,
+                                 auxKey: $scope.song.auxKey});
+      $scope.song = '';
     };
 
     $scope.deleteSong = function(song) {

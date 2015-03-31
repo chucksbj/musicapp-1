@@ -6,8 +6,8 @@ var mongoose = require('mongoose'),
 var SongSchema = new Schema({
   title: String,
   words: String,
-  start_key: String,
-  aux_key: String
+  startKey: String,
+  auxKey: String
 });
 
 module.exports = mongoose.model('Song', SongSchema);
