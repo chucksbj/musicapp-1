@@ -3,9 +3,10 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
  
 <div class="container">
+
+<div id="grid1" ui-grid="{ data: songs }" class="grid"></div>
  
   <form class="song-form" ng-submit="addSong()" name="songForm">
-
     <p class="input-group">
       <label>Title</p><label>
       <input class="form-control" ng-model="song.title" placeholder="Song title" required></input>
@@ -16,12 +17,11 @@
       <input class="form-control" ng-model="song.auxKey" placeholder="Other Keys"></input>
       <span class="input-group-btn">
         <button type="submit" class="btn btn-primary" ng-disabled="songForm.$invalid"
-          ng-click="addSong()">Add New</button>
+          ng-click="addSong()">Add Song</button>
       </span>
     </p>
   </form>
  
-  <ul class="song-list">
-    <li ng-repeat="song in songs">{{ song }}</li>
-  </ul>
 </div>
+
+

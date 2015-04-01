@@ -4,6 +4,15 @@ angular.module('musicappApp')
   .controller('SongCtrl', function ($scope, $http, socket) {
     $scope.song = {};
    $scope.songs = [];
+   $scope.gridOptions = {
+      enableSorting: true,
+      columnDefs: [ 
+        { name: 'title', enableSorting: true },
+        { name: 'words', visible: false },
+        { name: 'Start Key', enableSorting: true },
+        { name: 'Aux Key', enableSorting: false }
+      ]
+    };
 
     $http.get('/api/songs').success(function(songs) {
       $scope.songs = songs;
