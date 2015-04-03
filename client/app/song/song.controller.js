@@ -3,16 +3,20 @@
 angular.module('musicappApp')
   .controller('SongCtrl', function ($scope, $http, socket) {
     $scope.song = {};
-   $scope.songs = [];
-   $scope.gridOptions = {
+    $scope.songs = [];
+    $scope.gridOptions = {
       enableSorting: true,
       columnDefs: [ 
-        { name: 'title', enableSorting: true },
-        { name: 'words', visible: false },
-        { name: 'Start Key', enableSorting: true },
-        { name: 'Aux Key', enableSorting: false }
+        { name: 'title', displayName: 'Title', enableSorting: true },
+        { name: 'words', displayName: 'Words'},
+        { name: 'startKey', displayName: 'Start Key', enableSorting: true },
+        //{ name: 'auxKey', displayName: 'Aux Key',  enableSorting: false },
+        //{ field: '_id', visible: false },
+        //{ field: '__V', visible: false },
+        {name: 'edit', displayName: 'Edit', cellTemplate: '<button id="editBtn" type="button" class="btn-small" ng-click="edit(row.entity)" >Edit</button> '}
       ]
     };
+
 
     $http.get('/api/songs').success(function(songs) {
       $scope.songs = songs;
@@ -34,7 +38,14 @@ angular.module('musicappApp')
       $http.delete('/api/songs/' + song._id);
     };
 
+    $scope.clickHandler = {
+      onClick: function(value) {
+        window.alert('Name: '+value);
+      }
+    };
+
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('song');
     });
+
   });
