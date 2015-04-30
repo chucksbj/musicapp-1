@@ -3,8 +3,19 @@
 ## Create method
 ```
 yo angular-fullstack mussicapp
+
+-- add song json service
 yo angular-fullstack:endpoint song
+
+-- add view-rout-controller for song
 yo angular-fullstack:route song
+
+edit the song model adding fields
+edit the song.html
+ * adding a ui-grid
+ * and song form
+edit the song.controller.js
+add a song menu item
 ```
 
 ## Build

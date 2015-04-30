@@ -4,8 +4,10 @@ angular.module('musicappApp')
   .controller('SongCtrl', function ($scope, $http, socket) {
     $scope.song = {};
     $scope.songs = [];
+    $scope.showForm = false;
     $scope.gridOptions = {
       enableSorting: true,
+      enableFiltering: true,
       columnDefs: [ 
         { name: 'title', displayName: 'Title', enableSorting: true },
         { name: 'words', displayName: 'Words'},
@@ -22,6 +24,10 @@ angular.module('musicappApp')
       $scope.songs = songs;
       socket.syncUpdates('song', $scope.songs);
     });
+
+    $scope.addData = function (add) {
+      $scope.showForm = add;
+    };
 
     $scope.addSong = function() {
       if($scope.song === '') {
