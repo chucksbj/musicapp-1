@@ -3,9 +3,10 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
  
 <div class="container">
-  <button type="button" id="addData" class="btn btn-success" ng-click="addData(true)" ng-hide="showForm">Add Data</button>
-  <button type="button" id="addData" class="btn btn-success" ng-click="addData(false)" ng-show="showForm">Show Data</button>
-  <br>
+  <div class="btn-toolbar" role="toolbar" aria-label="...">
+    <button type="button" id="addData" class="btn btn-success" ng-click="addData(true)" ng-hide="showForm">Add Song</button>
+    <button type="button" id="addData" class="btn btn-success" ng-click="addData(false)" ng-show="showForm">Show Songs</button>
+  </div>
   <br>
 
   <div id="grid1" ui-grid="{ data: songs, gridOptions: gridOptions }" class="song-grid" ng-hide="showForm"></div>
@@ -13,15 +14,15 @@
   <form class="song-form" ng-submit="addSong()" name="songForm" ng-show="showForm">
     <p class="input-group">
       <label>Title</p><label>
-      <input class="form-control" ng-model="song.title" placeholder="Song title" required></input>
+      <input class="form-control" ng-model="song.title" placeholder="Song title" type="text" required></input>
       <label>Words</label>
-      <textarea class="form-control" ng-model="song.words" rows="3" placeholder="Words" required></textarea>
+      <textarea class="form-control" ng-model="song.words" rows="3" placeholder="Words" type="text" required></textarea>
       <label>Key<label>
-      <input class="form-control" ng-model="song.startKey" placeholder="Starting Key" required></input>
-      <input class="form-control" ng-model="song.auxKey" placeholder="Other Keys"></input>
+      <input class="form-control" ng-model="song.startKey" placeholder="Starting Key" type="text" required></input>
+      <input class="form-control" ng-model="song.auxKey" placeholder="Other Keys" type="text"></input>
       <span class="input-group-btn">
         <button type="submit" class="btn btn-primary" ng-disabled="songForm.$invalid"
-          ng-click="addSong()">Add Song</button>
+          ng-click="addSong()">Save</button>
       </span>
     </p>
   </form>
