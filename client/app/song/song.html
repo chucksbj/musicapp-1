@@ -9,7 +9,13 @@
   </div>
   <br>
 
-  <div id="grid1" ui-grid="{ data: songs, gridOptions: gridOptions }" class="song-grid" ng-hide="showForm"></div>
+  <div ng-hide="showForm">
+  <div id="grid1" ui-grid="gridOptions" class="song-grid"></div>
+  <button type="button" class="btn btn-success" ng-click="gridApi.pagination.previousPage()">
+        previous page</button>
+  <button type="button" class="btn btn-success" ng-click="gridApi.pagination.nextPage()">
+        next page</button>
+  </div>
    
   <form class="song-form" ng-submit="addSong()" name="songForm" ng-show="showForm">
     <p class="input-group">

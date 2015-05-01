@@ -5,23 +5,33 @@ angular.module('musicappApp')
     $scope.song = {};
     $scope.songs = [];
     $scope.showForm = false;
+
+    $scope.edit = function edit(row){
+      console.log("Here I need to know which button was selected " + row.entity.name);
+    };
+
     $scope.gridOptions = {
-      enableSorting: true,
-      enableFiltering: true,
-      columnDefs: [ 
-        { name: 'title', displayName: 'Title', enableSorting: true },
-        { name: 'words', displayName: 'Words'},
-        { name: 'startKey', displayName: 'Start Key', enableSorting: true },
-        //{ name: 'auxKey', displayName: 'Aux Key',  enableSorting: false },
-        //{ field: '_id', visible: false },
-        //{ field: '__V', visible: false },
-        {name: 'edit', displayName: 'Edit', cellTemplate: '<button id="editBtn" type="button" class="btn-small" ng-click="edit(row.entity)" >Edit</button> '}
-      ]
+        enableSorting: true,
+        enableFiltering: true,
+        columnDefs: [ 
+          { name: 'title', displayName: 'Title', enableSorting: true, enableFiltering: true },
+          { name: 'words', displayName: 'Words', enableSorting: true, enableFiltering: true },
+          { name: 'startKey', displayName: 'Start Key', enableSorting: true, enableFiltering: true },
+          { name: 'auxKey', displayName: 'Aux Key',  enableSorting: false, enableFiltering: false },
+          { field: '_id', visible: false },
+          { field: '__V', visible: false },
+          {name: 'edit', displayName: 'Edit', enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-primary" ng-click="edit(row)">Edit</button>'}
+        ]
+      };
+
+    $scope.gridOptions.onRegisterApi = function(gridApi) {
+      $scope.gridApi = gridApi;
     };
 
 
     $http.get('/api/songs').success(function(songs) {
       $scope.songs = songs;
+      $scope.gridOptions.data = songs;
       socket.syncUpdates('song', $scope.songs);
     });
 
