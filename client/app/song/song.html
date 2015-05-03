@@ -10,7 +10,7 @@
   <br>
 
   <div ng-hide="showForm">
-  <div id="grid1" ui-grid="gridOptions" class="song-grid"></div>
+  <div id="grid1" ui-grid="gridOptions" class="song-grid" external-scopes="$scope" ui-grid-edit></div>
   <button type="button" class="btn btn-success" ng-click="gridApi.pagination.previousPage()">
         previous page</button>
   <button type="button" class="btn btn-success" ng-click="gridApi.pagination.nextPage()">
