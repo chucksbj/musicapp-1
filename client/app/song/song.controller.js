@@ -52,7 +52,13 @@ angular.module('musicappApp')
     };
 
     $scope.editSong = function(entity) {
-      $log.debug('Which button was selected ' + entity.title);
+      //$log.debug('Which button was selected ' + entity.title);
+      // $scope.song is databound to the song form
+      $scope.song = entity;
+      $scope.showForm = true;
+
+      //Now refresh the view.
+      $scope.apply();
     };
 
     $scope.deleteSong = function(song) {
