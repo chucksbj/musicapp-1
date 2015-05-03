@@ -9,6 +9,10 @@ angular.module('musicappApp')
 
 
     $scope.gridOptions = {
+        paginationPageSizes: [10, 20, 30],
+        paginationPageSize: 10,
+        enablePagination: true,
+        enablePaginationControls: true,
         enableSorting: true,
         enableFiltering: true,
         multiSelect: false,
@@ -37,6 +41,7 @@ angular.module('musicappApp')
     });
 
     $scope.addData = function (add) {
+      // Show or hide the song form
       $scope.showForm = add;
     };
 
@@ -52,13 +57,9 @@ angular.module('musicappApp')
     };
 
     $scope.editSong = function(entity) {
-      //$log.debug('Which button was selected ' + entity.title);
-      // $scope.song is databound to the song form
+      // has binding to the song form
       $scope.song = entity;
       $scope.showForm = true;
-
-      //Now refresh the view.
-      $scope.apply();
     };
 
     $scope.deleteSong = function(song) {
