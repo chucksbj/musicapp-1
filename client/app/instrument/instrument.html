@@ -1,13 +1,33 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
  
 <div class="container">
+<div class="btn-toolbar" role="toolbar" aria-label="...">
+    <button type="button" id="addInsrument" class="btn btn-success" ng-click="addData(true)" ng-hide="showForm">Add Instrument</button>
+    <button type="button" id="showInstruments" class="btn btn-success" ng-click="addData(false)" ng-show="showForm">Show Instruments</button>
+  </div>
+  <br>
  
-  <ul class="instrument-list">
-    <li ng-repeat="inst in instruments">
-      <div>{{ instr.name}}</div>
-      <div>{{ instr.info }}</div>
-    </li>
-  </ul>
+  <div ng-hide="showForm">
+  	  <div id="gridInstrument" ui-grid="gridOptions" class="grid" external-scopes="$scope" ui-grid-edit></div>
+
+	  <ul class="instrument-list">
+	    <li ng-repeat="inst in instruments">
+	      <div>{{ inst.name }}</div>
+	    </li>
+	  </ul>
+ </div>
+
+<div ng-show="showForm">
+	<form class="instrument-form" ng-submit="addInstrument()" name="instrumentForm" ng-show="showForm">
+	    <p class="input-group">
+	      <label>Name</p></label>
+	      <input class="form-control" ng-model="instrument.name" placeholder="Instrument Name" type="text" required></input>
+	        <button type="submit" class="btn btn-primary" ng-disabled="instrumentForm.$invalid"
+	          ng-click="addInstrument()">Save</button>
+	      </span>
+	    </p>
+	  </form>
+  </div>
 
 </div>
 

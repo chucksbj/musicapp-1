@@ -10,7 +10,7 @@
   <br>
 
   <div ng-hide="showForm">
-  <div id="grid1" ui-grid="gridOptions" class="song-grid" external-scopes="$scope" ui-grid-edit></div>
+  <div id="gridSong" ui-grid="gridOptions" class="grid" external-scopes="$scope" ui-grid-edit></div>
   <button type="button" class="btn btn-success" ng-click="gridApi.pagination.previousPage()">
         previous page</button>
   <button type="button" class="btn btn-success" ng-click="gridApi.pagination.nextPage()">
@@ -19,12 +19,13 @@
    
   <form class="song-form" ng-submit="addSong()" name="songForm" ng-show="showForm">
     <p class="input-group">
-      <label>Title</p><label>
+      <label>Title</label>
       <input class="form-control" ng-model="song.title" placeholder="Song title" type="text" required></input>
       <label>Words</label>
       <textarea class="form-control" ng-model="song.words" rows="3" placeholder="Words" type="text" required></textarea>
-      <label>Key<label>
+      <label>Key</label>
       <input class="form-control" ng-model="song.startKey" placeholder="Starting Key" type="text" required></input>
+      <label>Alternate Keys</label>
       <input class="form-control" ng-model="song.auxKey" placeholder="Other Keys" type="text"></input>
       <span class="input-group-btn">
         <button type="submit" class="btn btn-primary" ng-disabled="songForm.$invalid"
