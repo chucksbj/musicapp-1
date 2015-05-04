@@ -5,8 +5,6 @@ var mongoose = require('mongoose'),
 
 var InstrumentSchema = new Schema({
   name: String,
-  info: String,
-  active: Boolean
 });
 
 module.exports = mongoose.model('Instrument', InstrumentSchema);

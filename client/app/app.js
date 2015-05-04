@@ -7,7 +7,9 @@ angular.module('musicappApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'ui.grid'
+  'ui.grid',
+  'ui.grid.selection',
+  'ui.grid.pagination'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

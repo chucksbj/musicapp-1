@@ -1,10 +1,56 @@
 # musicapp
 
+
+## First time installs
+yoeman install:
+npm install -g yo
+
+angular-fullstack install:
+npm install -g generator-angular-fullstack
+
+Install grunt
+npm install -g grunt-cli
+
+Install bower globally
+npm install -g bower
+
+
+
+
 ## Create method
 ```
 yo angular-fullstack mussicapp
+
+
+## First Time build
+1 First step
+```
+cd musicapp
+npm installs
+```
+
+2. Second build step
+```
+bower install
+```
+
+3.Third build step:
+```
+grunt build
+```
+
+-- add song json service
 yo angular-fullstack:endpoint song
+
+-- add view-rout-controller for song
 yo angular-fullstack:route song
+
+edit the song model adding fields
+edit the song.html
+ * adding a ui-grid
+ * and song form
+edit the song.controller.js
+add a song menu item in the menu controller
 ```
 
 ## Build
