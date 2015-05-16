@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/sheetMusic/sheetMusic.socket').register(socket);
   require('../api/instrument/instrument.socket').register(socket);
   require('../api/song/song.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);

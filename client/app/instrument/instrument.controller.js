@@ -9,14 +9,14 @@ angular.module('musicappApp')
 
     $scope.gridOptions = {
         enableSorting: true,
-        enableFiltering: true,
+        enableFiltering: false,
         multiSelect: false,
+        sortInfo: {fields:['name'], directions:['asc']},
         columnDefs: [
           { field: '_id', visible: false },
-          { name: 'name', displayName: 'Instrument Name', enableSorting: true, enableFiltering: true },
-          
-          {name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editInstrument(row.entity) ">Edit</button>'},
-          {name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteInstrument(row.entity)" >Delete</button> '}
+          { field: 'name', displayName: 'Instrument Name', enableSorting: true, enableFiltering: true},
+          { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editInstrument(row.entity) ">Edit</button>'},
+          { name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteInstrument(row.entity)" >Delete</button> '}
         ]
       };
 
@@ -25,6 +25,11 @@ angular.module('musicappApp')
       $scope.instruments = instruments;
       $scope.gridOptions.data = instruments;
       socket.syncUpdates('instrument', $scope.instruments);
+    });
+
+    $http.get('/api/things').success(function(awesomeThings) {
+      $scope.awesomeThings = awesomeThings;
+      socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
     $scope.addData = function (add) {
@@ -37,12 +42,12 @@ angular.module('musicappApp')
         return;
       }
 
-      if ($scope.isEdit) {
-        $http.put('/api/instruments/'+$scope.instrument._id, { name: $scope.instrument.name});
-        $scope.isEdit = false;
-      } else {
-        $http.post('/api/instruments', { name: $scope.instrument.name});
-      }
+    if ($scope.isEdit) {
+	    $http.put('/api/instruments/'+$scope.instrument._id, { name: $scope.instrument.name});
+	    $scope.isEdit = false;
+	  } else {
+	  	$http.post('/api/instruments', { name: $scope.instrument.name});
+	  }
 
       $scope.instrument = '';
     };
@@ -56,6 +61,16 @@ angular.module('musicappApp')
 
     $scope.deleteInstrument = function(entity) {
       $http.delete('/api/instruments/' + entity._id);
+    };
+
+    $scope.instrumentList = function(entity) {
+      $scope.instrument = entity;
+    };
+
+    $scope.instrumentSelected = function(entity) {
+        $scope.instrument = entity;
+
+
     };
 
 

@@ -6,7 +6,6 @@ angular.module('musicappApp')
     $scope.song = {};
     $scope.songs = [];
     $scope.showForm = false;
-    $scope.isEdit = false;
 
 
     $scope.gridOptions = {
@@ -49,25 +48,17 @@ angular.module('musicappApp')
     $scope.addSong = function() {
       if($scope.song === '') {
         return;
-      }if ($scope.isEdit) {
-        $http.put('/api/songs/'+$scope.song._id, { title: $scope.song.title,
-                                 words: $scope.song.words,
-                                 startKey: $scope.song.startKey,
-                                 auxKey: $scope.song.auxKey});
-        $scope.isEdit = false;
-      } else {
-        $http.post('/api/songs', { title: $scope.song.title,
-                                 words: $scope.song.words,
-                                 startKey: $scope.song.startKey,
-                                 auxKey: $scope.song.auxKey});
       }
+      $http.post('/api/songs', { title: $scope.song.title,
+                                 words: $scope.song.words,
+                                 startKey: $scope.song.startKey,
+                                 auxKey: $scope.song.auxKey});
       $scope.song = '';
     };
 
     $scope.editSong = function(entity) {
       // has binding to the song form
       $scope.song = entity;
-      $scope.isEdit = true;
       $scope.showForm = true;
     };
 

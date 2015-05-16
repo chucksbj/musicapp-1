@@ -1,20 +1,15 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
- 
+
 <div class="container">
 <div class="btn-toolbar" role="toolbar" aria-label="...">
     <button type="button" id="addInsrument" class="btn btn-success" ng-click="addData(true)" ng-hide="showForm">Add Instrument</button>
     <button type="button" id="showInstruments" class="btn btn-success" ng-click="addData(false)" ng-show="showForm">Show Instruments</button>
-  </div>
+</div>
   <br>
  
   <div ng-hide="showForm">
   	  <div id="gridInstrument" ui-grid="gridOptions" class="grid" external-scopes="$scope" ui-grid-edit></div>
-
-	  <ul class="instrument-list">
-	    <li ng-repeat="inst in instruments">
-	      <div>{{ inst.name }}</div>
-	    </li>
-	  </ul>
+  	  <a class="nav nav-tabs nav-stacked col-md-50 col-lg-50 col-sm-50" id="repeatInstrument" ng-hide="showForm"ng-repeat="instrument in instruments" href="/sheetMusic?={{instrument.name}}">{{instrument.name}}</a>
  </div>
 
 <div ng-show="showForm">

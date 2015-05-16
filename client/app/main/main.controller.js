@@ -9,12 +9,13 @@ angular.module('musicappApp')
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
-    $scope.addThing = function() {
+    $scope.addThing = function(thing) {
       if($scope.newThing === '') {
         return;
       }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
+        $http.post('/api/things', { name: $scope.newThing });
+        $scope.newThing = '';
+        $http.delete('/api/things/' + thing._id);
     };
 
     $scope.deleteThing = function(thing) {

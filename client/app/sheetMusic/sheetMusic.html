@@ -1,0 +1,29 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+<div class="btn-toolbar" role="toolbar" aria-label="...">
+    <button type="button" id="addMusic" class="btn btn-success" ng-click="addData(true)" ng-hide="showForm">Add Music</button>
+    <button type="button" id="showMusic" class="btn btn-success" ng-click="addData(false)" ng-show="showForm">Show Music</button>
+</div>
+<a id="nextSong" class="nav nav-tabs nav-stacked col-md-2 col-lg-2 col-sm-1" ng-hide="showForm" ng-repeat="thing in awesomeThings | limitTo:-1" href="/sheetMusic?title={{thing.name}}">{{thing.name}}</a>
+  <br>
+ 
+  <div>
+  	  <div id="gridSheetMusic" ui-grid="gridOptions" class="grid" external-scopes="$scope" ng-hide="showForm" ui-grid-edit></div>
+  	  <a class="nav nav-tabs nav-stacked col-md-50 col-lg-50 col-sm-50" id="repeatSheetMusic" ng-hide="showForm" ng-repeat="sheetMusic in sheetMusics" href="/sheetMusicDisplay?={{sheetMusuic.title}}">{{sheetMusic.title}}</a>
+ </div>
+
+<div ng-show="showForm">
+	<form class="sheetMusic-form" ng-submit="addSheetMusic()" name="sheetMusicForm" ng-show="showForm">
+	    <p class="input-group">
+	      <label>Title</p></label>
+	      <input class="form-control" ng-model="sheetMusic.title" placeholder="Sheet Music Title" type="text" required></input>
+	        <button type="submit" class="btn btn-primary" ng-disabled="sheetMusicForm.$invalid"
+	          ng-click="addSheetMusic()">Save</button>
+	      </span>
+	    </p>
+	  </form>
+  </div>
+
+</div>
+

@@ -9,6 +9,7 @@ var errors = require('./components/errors');
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/sheetMusics', require('./api/sheetMusic'));
   app.use('/api/instruments', require('./api/instrument'));
   app.use('/api/songs', require('./api/song'));
   app.use('/api/things', require('./api/thing'));
