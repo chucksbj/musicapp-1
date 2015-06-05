@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('musicappApp')
-  .controller('InstrumentCtrl', function ($scope, $http, socket) {
+  .controller('InstrumentCtrl', function ($scope, $http, socket, $rootScope) {
   	$scope.instrument = {};
     $scope.instruments = [];
+    $scope.instrumentSelect = {};
     $scope.showForm = false;
     $scope.isEdit = false;
 
@@ -14,9 +15,10 @@ angular.module('musicappApp')
         sortInfo: {fields:['name'], directions:['asc']},
         columnDefs: [
           { field: '_id', visible: false },
-          { field: 'name', displayName: 'Instrument Name', enableSorting: true, enableFiltering: true},
+          { name: 'name', displayName: 'Instrument Name', enableSorting: true, enableFiltering: true},
+          { name: 'select', displayName: 'Select', width: 75, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="selectBtn" type="button" class="btn btn-small" ng-click="grid.appScope.instrumentSelected(row.entity) " >Select</button>'},
           { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editInstrument(row.entity) ">Edit</button>'},
-          { name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteInstrument(row.entity)" >Delete</button> '}
+          { name: 'delete', displayName: 'Delete', width: 70, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteInstrument(row.entity)" >Delete</button> '}
         ]
       };
 
@@ -63,15 +65,48 @@ angular.module('musicappApp')
       $http.delete('/api/instruments/' + entity._id);
     };
 
+    $scope.editInstruments = function() {
+      // has binding to the instrument form
+      $scope.instrument.name = $scope.instrumentSelect.name.name;
+      $scope.isEdit = true;
+      $scope.showForm = true;
+    };
+
+    $scope.deleteInstruments = function() {
+      var entity = $scope.instrumentSelect.name;
+      $http.delete('/api/instruments/' + entity._id);
+    };
+
+
     $scope.instrumentList = function(entity) {
       $scope.instrument = entity;
     };
 
     $scope.instrumentSelected = function(entity) {
-        $scope.instrument = entity;
+      $scope.instrumentSelect = entity;
+      $rootScope.instrumentSelect = entity;
+    };
 
+    $scope.selectInstrument = function() {
+      selectInstruments($scope.instrumentSelect.name);
+    };
+
+    $scope.selectInstruments = function(entity) {
+      $rootScope.instrumentSelect = entity;
+      $scope.instrumentSelect.name = entity;
+    };
+
+    $scope.resize = function() {
+        return {height:(30 * $scope.gridOptions.data.length + 51)+"px"};
 
     };
 
+    $scope.$on('$destroy', function () {
+      socket.unsyncUpdates('instrument');
+    });
+
+    $scope.$on('$destroy', function () {
+      socket.unsyncUpdates('thing');
+    });
 
   });

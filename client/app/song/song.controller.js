@@ -4,6 +4,8 @@ angular.module('musicappApp')
   .controller('SongCtrl', function ($scope, $http, $log, socket) {
 
     $scope.song = {};
+    $scope.nextSong = {};
+    $scope.prevSong = {};
     $scope.songs = [];
     $scope.showForm = false;
 
@@ -24,10 +26,16 @@ angular.module('musicappApp')
           { name: 'auxKey', displayName: 'Aux Key',  width: 80, enableSorting: false, enableFiltering: false },
           
           //{ field: '__V', visible: false },
+          { name: 'select', displayName: 'Select', width: 75, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="selectBtn" type="button" class="btn btn-small" ng-click="grid.appScope.addThing(row.entity) " >Select</button>'},
           {name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editSong(row.entity) ">Edit</button>'},
           {name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteSong(row.entity)" >Delete</button> '}
         ]
       };
+
+      $http.get('/api/things').success(function(awesomeThings) {
+      $scope.awesomeThings = awesomeThings;
+      socket.syncUpdates('thing', $scope.awesomeThings);
+    });
 
     $scope.gridOptions.onRegisterApi = function(gridApi) {
       $scope.gridApi = gridApi;
@@ -66,9 +74,21 @@ angular.module('musicappApp')
       $http.delete('/api/songs/' + song._id);
     };
 
+    $scope.addThing = function(entity) {
+      var id = $scope.nextSong._id;
+        $scope.prevSong = $scope.nextSong._id;
+        $scope.nextSong = entity;
+        $http.delete('/api/things/' + id );
+        $http.post('/api/things', { name: $scope.nextSong.title });
+        
+    };
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('song');
+    });
+
+    $scope.$on('$destroy', function () {
+      socket.unsyncUpdates('thing');
     });
 
   });

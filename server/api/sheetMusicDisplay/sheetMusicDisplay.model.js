@@ -3,11 +3,10 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var InstrumentSchema = new Schema({
+var SheetMusicDisplaySchema = new Schema({
   name: String,
-  select: String,
   info: String,
   active: Boolean
 });
 
-module.exports = mongoose.model('Instrument', InstrumentSchema);
+module.exports = mongoose.model('SheetMusicDisplay', SheetMusicDisplaySchema);

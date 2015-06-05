@@ -8,10 +8,10 @@ npm install -g yo
 angular-fullstack install:
 npm install -g generator-angular-fullstack
 
-Install grunt
+Install grunt command line interface globally:
 npm install -g grunt-cli
 
-Install bower globally
+Install bower globally:
 npm install -g bower
 
 
@@ -26,7 +26,7 @@ yo angular-fullstack mussicapp
 1 First step
 ```
 cd musicapp
-npm installs
+npm install
 ```
 
 2. Second build step
@@ -80,7 +80,7 @@ Note: After executing the commands below
 the dist folder now points to the heroku git repository
 
 ```
-yo angular-fillstack:heroku
+yo angular-fullstack:heroku
 cd dist
 git push heroku master
 

@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('musicappApp')
-  .controller('SheetMusicCtrl', function ($scope, $http, socket) {
+  .controller('SheetMusicCtrl', function ($scope, $http, socket, $rootScope) {
   	$scope.sheetMusic = {};
     $scope.sheetMusics = [];
     $scope.showForm = false;
     $scope.isEdit = false;
+    $scope.instrumentSelect = $rootScope.instrumentSelect;
 
     $scope.gridOptions = {
         enableSorting: true,
@@ -14,7 +15,8 @@ angular.module('musicappApp')
         sortInfo: {fields:['title'], directions:['asc']},
         columnDefs: [
           { field: '_id', visible: false },
-          { field: 'title', displayName: 'Song Name', enableSorting: true, enableFiltering: true},
+          { name: 'instrument', displayName: 'Instrument', enableSorting: true, enableFiltering: true},
+          { name: 'name', displayName: 'Song Name', enableSorting: true, enableFiltering: true},
           { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editSheetMusic(row.entity) ">Edit</button>'},
           { name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteSheetMusic(row.entity)" >Delete</button> '}
         ]
@@ -28,7 +30,7 @@ angular.module('musicappApp')
     });
 
     $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings
+      $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
@@ -43,10 +45,11 @@ angular.module('musicappApp')
         return;
       }
     	if ($scope.isEdit) {
-	    $http.put('/api/sheetMusics/'+$scope.sheetMusic._id, { title: $scope.sheetMusic.title});
+	    $http.put('/api/sheetMusics/' + $scope.sheetMusic._id, { name: $scope.sheetMusic.name});
 	    $scope.isEdit = false;
 	  } else {
-	  	$http.post('/api/sheetMusics', { title: $scope.sheetMusic.title});
+	  	$http.post('/api/sheetMusics',  { name: $scope.sheetMusic.name,
+                                        instrument: $scope.sheetMusic.instrument });
 	  }
 
       $scope.sheetMusic = '';

@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 
 var SheetMusicSchema = new Schema({
   name: String,
+  instrument: String,
   info: String,
   active: Boolean
 });
