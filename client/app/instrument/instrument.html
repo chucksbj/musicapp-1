@@ -6,15 +6,14 @@
     <button type="button" id="showInstruments" class="btn btn-success" ng-click="addData(false)" ng-show="showForm">Show Instruments</button>
 </div>
   <br>
- <!--
+ 
   <div ng-hide="showForm" ng-show="showInst">
-  	  <div ui-if="gridOptions.data.length>0" id="gridInstrument" ui-grid="gridOptions" class="grid" external-scopes="$scope" ui-grid-auto-resize ng-style="resize()"></div>
- -->
-  	  <a href="/sheetMusic" type='button' class="btn btn-small">Select</a>
+  		<span ng-if="instrumentSelect.name">Instrument Selected:  {{instrumentSelect.name}}</span>
+  	  <div ng-if="gridOptions.data.length>0" id="gridInstrument" ui-grid="gridOptions" class="grid" external-scopes="$scope" ui-grid-auto-resize ng-style="resize()"></div>
+  </div>
 
 <!---
-  	  <a class="nav nav-tabs nav-stacked col-md-50 col-lg-50 col-sm-50" id="repeatInstrument" ng-hide="showForm" ng-repeat="instrument in instruments | or$scope.nextSong._id;derBy: 'name' " ng-click="instrumentSelected({{instrument.name}})" href="/sheetMusic">{{instrument.name}}</a>
--->
+  	  <a class="nav nav-tabs nav-stacked col-md-50 col-lg-50 col-sm-50" id="repeatInstrument" ng-hide="showForm" ng-repeat="instrument in instruments | orderBy: 'name' " ng-click="instrumentSelected({{instrument.name}})" href="/sheetMusic">{{instrument.name}}</a>
 <br> <br>
 	<form class="instrument-select-form" ng-hide="showForm" name="selectInstrumentForm">
 		<p class="form-group">
@@ -30,6 +29,7 @@
 		</p>
 	</form>
  </div>
+-->
 
 
 <div ng-show="showForm">

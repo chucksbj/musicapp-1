@@ -20,13 +20,12 @@ angular.module('musicappApp')
         multiSelect: false,
         columnDefs: [
           { field: '_id', visible: false },
-          { name: 'title', displayName: 'Title', enableSorting: true, enableFiltering: true },
+          { name: 'title', displayName: 'Title', enableSorting: true, enableFiltering: true, cellTemplate: '<a href="/word" ng-click="grid.appScope.addThing(row.entity) " >{{row.entity.title}}</a>' },
           { name: 'words', displayName: 'Words', enableSorting: true, enableFiltering: true },
           { name: 'startKey', displayName: 'Start Key', width: 80, enableSorting: true, enableFiltering: true },
           { name: 'auxKey', displayName: 'Aux Key',  width: 80, enableSorting: false, enableFiltering: false },
           
           //{ field: '__V', visible: false },
-          { name: 'select', displayName: 'Select', width: 75, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="selectBtn" type="button" class="btn btn-small" ng-click="grid.appScope.addThing(row.entity) " >Select</button>'},
           {name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editSong(row.entity) ">Edit</button>'},
           {name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteSong(row.entity)" >Delete</button> '}
         ]
@@ -81,6 +80,10 @@ angular.module('musicappApp')
         $http.delete('/api/things/' + id );
         $http.post('/api/things', { name: $scope.nextSong.title });
         
+    };
+
+    $scope.resize = function() {
+        return {height:(30 * $scope.gridOptions.data.length + 51)+"px"};
     };
 
     $scope.$on('$destroy', function () {

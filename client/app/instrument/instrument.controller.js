@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('musicappApp')
-  .controller('InstrumentCtrl', function ($scope, $http, socket, $rootScope) {
+  .controller('InstrumentCtrl', function ($scope, $http, socket, $rootScope, uiGridConstants) {
   	$scope.instrument = {};
     $scope.instruments = [];
     $scope.instrumentSelect = {};
@@ -12,11 +12,9 @@ angular.module('musicappApp')
         enableSorting: true,
         enableFiltering: false,
         multiSelect: false,
-        sortInfo: {fields:['name'], directions:['asc']},
         columnDefs: [
           { field: '_id', visible: false },
-          { name: 'name', displayName: 'Instrument Name', enableSorting: true, enableFiltering: true},
-          { name: 'select', displayName: 'Select', width: 75, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="selectBtn" type="button" class="btn btn-small" ng-click="grid.appScope.instrumentSelected(row.entity) " >Select</button>'},
+          { field: 'name', displayName: 'Instrument Name', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.instrumentSelected(row.entity)" >{{row.entity.name}}</a>'},
           { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editInstrument(row.entity) ">Edit</button>'},
           { name: 'delete', displayName: 'Delete', width: 70, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteInstrument(row.entity)" >Delete</button> '}
         ]
@@ -27,6 +25,7 @@ angular.module('musicappApp')
       $scope.instruments = instruments;
       $scope.gridOptions.data = instruments;
       socket.syncUpdates('instrument', $scope.instruments);
+
     });
 
     $http.get('/api/things').success(function(awesomeThings) {

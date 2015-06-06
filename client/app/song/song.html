@@ -10,7 +10,7 @@
   <br>
 
   <div ng-hide="showForm">
-  <div id="gridSong" ui-grid="gridOptions" class="grid" external-scopes="$scope" ui-grid-edit></div>
+  <div ui-grid-auto-resize ng-style="resize()" ng-if="gridOptions.data.length>0" id="gridSong" ui-grid="gridOptions" class="grid" external-scopes="$scope" ui-grid-edit></div>
   <button type="button" class="btn btn-success" ng-click="gridApi.pagination.previousPage()">
         previous page</button>
   <button type="button" class="btn btn-success" ng-click="gridApi.pagination.nextPage()">
