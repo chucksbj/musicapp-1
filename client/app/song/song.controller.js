@@ -11,19 +11,19 @@ angular.module('musicappApp')
 
 
     $scope.gridOptions = {
-        paginationPageSizes: [10, 20, 30],
-        paginationPageSize: 10,
-        enablePagination: true,
-        enablePaginationControls: true,
+        //paginationPageSizes: [10, 20, 30],
+        //paginationPageSize: 10,
+        //enablePagination: true,
+        //enablePaginationControls: true,
         enableSorting: true,
         enableFiltering: true,
         multiSelect: false,
         columnDefs: [
           { field: '_id', visible: false },
-          { name: 'title', displayName: 'Title', enableSorting: true, enableFiltering: true, cellTemplate: '<a href="/word" ng-click="grid.appScope.addThing(row.entity) " >{{row.entity.title}}</a>' },
-          { name: 'words', displayName: 'Words', enableSorting: true, enableFiltering: true },
-          { name: 'startKey', displayName: 'Start Key', width: 80, enableSorting: true, enableFiltering: true },
-          { name: 'auxKey', displayName: 'Aux Key',  width: 80, enableSorting: false, enableFiltering: false },
+          { field: 'title', displayName: 'Title', enableSorting: true, enableFiltering: true, cellTemplate: '<a href="/word" ng-click="grid.appScope.addThing(row.entity) " >{{row.entity.title}}</a>' },
+          { field: 'words', displayName: 'Words', enableSorting: true, enableFiltering: true },
+          { field: 'startKey', displayName: 'Start Key', width: 80, enableSorting: true, enableFiltering: true },
+          { field: 'auxKey', displayName: 'Aux Key',  width: 80, enableSorting: false, enableFiltering: false },
           
           //{ field: '__V', visible: false },
           {name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editSong(row.entity) ">Edit</button>'},

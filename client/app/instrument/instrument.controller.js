@@ -33,6 +33,10 @@ angular.module('musicappApp')
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
+    $scope.gridOptions.onRegisterApi = function(gridApi) {
+      $scope.gridApi = gridApi;
+    };
+
     $scope.addData = function (add) {
       // Show or hide the song form
       $scope.showForm = add;

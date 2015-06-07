@@ -6,6 +6,7 @@ angular.module('musicappApp')
     $scope.sheetMusics = [];
     $scope.showForm = false;
     $scope.isEdit = false;
+    $scope.awesomeThings = [];
     $scope.instrumentSelect = $rootScope.instrumentSelect;
 
     $scope.gridOptions = {
@@ -39,6 +40,9 @@ angular.module('musicappApp')
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
+    $scope.gridOptions.onRegisterApi = function(gridApi) {
+      $scope.gridApi = gridApi;
+    };
 
     $scope.addData = function (add) {
       // Show or hide the song form
@@ -71,12 +75,12 @@ angular.module('musicappApp')
       $http.delete('/api/sheetMusics/' + entity._id);
     };
 
-    $scope.sheetMusicList = function(entity) {
-      $scope.sheetMusic = entity;
+    $scope.songSelected = function(entity) {
+        $rootScope.songSelect = entity;
     };
 
-    $scope.songSelected = function(entity) {
-        $scope.sheetMusic = entity;
+    $scope.currentSongSelected = function() {
+        $rootScope.songSelect = $scope.awesomeThings[$scope.awesomeThings.length - 1];
     };
 
     $scope.resize = function() {
