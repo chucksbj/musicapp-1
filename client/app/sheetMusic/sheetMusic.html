@@ -14,8 +14,8 @@
 <div ng-show="showForm">
 	<form class="sheetMusic-form" ng-submit="addSheetMusic()" name="sheetMusicForm" ng-show="showForm">
 	    <p class="input-group">
-	      <label>Enter a Title</label>
-	      <select class="form-control" ng-model="sheetMusic.instrument"><option  ng-repeat="instrument in instruments | orderBy: 'name' " value="{{instrument.name}}" placeholder="Select One">{{instrument.name}}</option></select>>	      
+	      <label>Select the Instrument then Enter the Title:</label>
+	      <select class="form-control" ng-model="sheetMusic.instrument"><option  ng-repeat="instrument in instruments | orderBy: 'name' " value="{{instrument.name}}" placeholder="Select One">{{instrument.name}}</option></select>	      
 	      <input class="form-control" ng-model="sheetMusic.name" placeholder="Sheet Music Title" type="text" required></input>
 	      <button type="submit" class="btn btn-primary" ng-disabled="sheetMusicForm.$invalid" ng-click="addSheetMusic()">Save</button>
 	    </p>

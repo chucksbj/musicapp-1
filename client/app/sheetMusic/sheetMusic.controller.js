@@ -11,12 +11,12 @@ angular.module('musicappApp')
 
     $scope.gridOptions = {
         enableSorting: true,
-        enableFiltering: false,
+        enableFiltering: true,
         multiSelect: false,
         sortInfo: {fields:['title'], directions:['asc']},
         columnDefs: [
           { field: '_id', visible: false },
-          { name: 'instrument', displayName: 'Instrument', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true},
+          { name: 'instrument', displayName: 'Instrument', width: 150, enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true},
           { name: 'name', displayName: 'Song Name', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 2}, enableFiltering: true, cellTemplate: '<a href="/sheetMusicDisplay" ng-click="grid.appScope.songSelected(row.entity)" >{{row.entity.name}}</a>'},
           { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editSheetMusic(row.entity) ">Edit</button>'},
           { name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteSheetMusic(row.entity)" >Delete</button> '}

@@ -74,11 +74,10 @@ angular.module('musicappApp')
     };
 
     $scope.addThing = function(entity) {
-      var id = $scope.nextSong._id;
-        $scope.prevSong = $scope.nextSong._id;
-        $scope.nextSong = entity;
-        $http.delete('/api/things/' + id );
-        $http.post('/api/things', { name: $scope.nextSong.title });
+      if ($scope.awesomeThings.length >0) {
+        $http.delete('/api/things/' + $scope.awesomeThings[$scope.awesomeThings.length - 1]._id );
+      }
+        $http.post('/api/things', { name: entity.title });
         
     };
 

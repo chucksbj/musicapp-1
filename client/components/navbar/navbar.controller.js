@@ -11,8 +11,20 @@ angular.module('musicappApp')
       'link': '/song'
     },
     {
+      'title': 'Words',
+      'link': '/word'
+    },
+    {
       'title': 'Instrument',
       'link': '/instrument'
+    },
+    {
+      'title': 'Sheet Music',
+      'link': '/sheetMusic'
+    },
+    {
+      'title': 'Sheet Music Display',
+      'link': '/sheetMusicDisplay'
     }];
 
     $scope.isCollapsed = true;

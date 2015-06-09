@@ -9,8 +9,8 @@ var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
 
 Thing.find({}).remove(function() {
-  Thing.create({
-    name : 'Development Tools',
+  Thing.create( //{
+/*    name : 'Development Tools',
     info : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.'
   }, {
     name : 'Server and Client integration',
@@ -26,8 +26,9 @@ Thing.find({}).remove(function() {
     info : 'Build process packs up your templates as a single JavaScript payload, minifies your scripts/css/images, and rewrites asset names for caching.'
   },{
     name : 'Deployment Ready',
-    info : 'Easily deploy your app to Heroku or Openshift with the heroku and openshift subgenerators'
-  });
+    info : 'Easily deploy your app to Heroku or Openshift with the heroku and openshift subgenerators' */
+  //}
+  );
 });
 
 User.find({}).remove(function() {
@@ -42,7 +43,13 @@ User.find({}).remove(function() {
     name: 'Admin',
     email: 'admin@admin.com',
     password: 'admin'
-  }, function() {
+  }, {
+    provider: 'local',
+    role: 'admin',
+    name: 'chucksbj',
+    email: 'chucksbj@gmail.com',
+    password: 'engines1'
+  },function() {
       console.log('finished populating users');
     }
   );
