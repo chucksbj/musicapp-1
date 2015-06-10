@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('musicappApp')
-  .controller('InstrumentCtrl', function ($scope, $http, socket, $rootScope, uiGridConstants) {
+  .controller('InstrumentCtrl', function ($scope, $http, socket, uiGridConstants, selections) {
   	$scope.instrument = {};
     $scope.instruments = [];
-    $scope.instrumentSelect = {};
     $scope.showForm = false;
     $scope.isEdit = false;
+    $scope.instrumentSelect = selections.getInstrument();
 
     $scope.gridOptions = {
         enableSorting: true,
@@ -20,14 +20,14 @@ angular.module('musicappApp')
         ]
       };
 
-
+    //Instrument Database access and asyncronous updates
     $http.get('/api/instruments').success(function(instruments) {
       $scope.instruments = instruments;
       $scope.gridOptions.data = instruments;
       socket.syncUpdates('instrument', $scope.instruments);
-
     });
 
+    //"things" Database access and asyncronous updates (used to display the next song up)
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
@@ -46,14 +46,12 @@ angular.module('musicappApp')
       if($scope.instrument === '') {
         return;
       }
-
-    if ($scope.isEdit) {
-	    $http.put('/api/instruments/'+$scope.instrument._id, { name: $scope.instrument.name});
-	    $scope.isEdit = false;
-	  } else {
-	  	$http.post('/api/instruments', { name: $scope.instrument.name});
-	  }
-
+      if ($scope.isEdit) {
+        $http.put('/api/instruments/'+$scope.instrument._id, { name: $scope.instrument.name});
+        $scope.isEdit = false;
+      } else {
+        $http.post('/api/instruments', { name: $scope.instrument.name});
+      }
       $scope.instrument = '';
     };
 
@@ -68,39 +66,13 @@ angular.module('musicappApp')
       $http.delete('/api/instruments/' + entity._id);
     };
 
-    $scope.editInstruments = function() {
-      // has binding to the instrument form
-      $scope.instrument.name = $scope.instrumentSelect.name.name;
-      $scope.isEdit = true;
-      $scope.showForm = true;
-    };
-
-    $scope.deleteInstruments = function() {
-      var entity = $scope.instrumentSelect.name;
-      $http.delete('/api/instruments/' + entity._id);
-    };
-
-
-    $scope.instrumentList = function(entity) {
-      $scope.instrument = entity;
-    };
-
     $scope.instrumentSelected = function(entity) {
-      $scope.instrumentSelect = entity;
-      $rootScope.instrumentSelect = entity;
-    };
-
-    $scope.selectInstrument = function() {
-      selectInstruments($scope.instrumentSelect.name);
-    };
-
-    $scope.selectInstruments = function(entity) {
-      $rootScope.instrumentSelect = entity;
-      $scope.instrumentSelect.name = entity;
+      selections.setInstrument(entity);
     };
 
     $scope.resize = function() {
-        return {height:(30 * $scope.gridOptions.data.length + 51)+"px"};
+      //For Dynamic resizing of the instrument ui-grid
+      return {height:(30 * $scope.gridOptions.data.length + 51)+"px"};
 
     };
 
@@ -112,4 +84,4 @@ angular.module('musicappApp')
       socket.unsyncUpdates('thing');
     });
 
-  });
+});

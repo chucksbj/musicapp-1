@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('musicappApp')
-  .controller('SheetMusicCtrl', function ($scope, $http, socket, $rootScope, uiGridConstants) {
+  .controller('SheetMusicCtrl', function ($scope, $http, socket, $rootScope, uiGridConstants, selections) {
   	$scope.sheetMusic = {};
     $scope.sheetMusics = [];
     $scope.showForm = false;
     $scope.isEdit = false;
     $scope.awesomeThings = [];
-    $scope.instrumentSelect = $rootScope.instrumentSelect;
+    //$scope.instrumentSelect = $rootScope.instrumentSelect;
+    $scope.instrumentSelect = selections.getInstrument();
 
     $scope.gridOptions = {
         enableSorting: true,
@@ -76,7 +77,8 @@ angular.module('musicappApp')
     };
 
     $scope.songSelected = function(entity) {
-        $rootScope.songSelect = entity;
+        selections.setSong(entity);
+        //$rootScope.songSelect = entity;
     };
 
     $scope.currentSongSelected = function() {

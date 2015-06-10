@@ -1,11 +1,9 @@
 'use strict';
 
 angular.module('musicappApp')
-  .controller('SongCtrl', function ($scope, $http, $log, socket) {
+  .controller('SongCtrl', function ($scope, $http, $log, socket, selections) {
 
     $scope.song = {};
-    $scope.nextSong = {};
-    $scope.prevSong = {};
     $scope.songs = [];
     $scope.showForm = false;
 
@@ -31,20 +29,19 @@ angular.module('musicappApp')
         ]
       };
 
-      $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
-    });
-
     $scope.gridOptions.onRegisterApi = function(gridApi) {
       $scope.gridApi = gridApi;
     };
-
 
     $http.get('/api/songs').success(function(songs) {
       $scope.songs = songs;
       $scope.gridOptions.data = songs;
       socket.syncUpdates('song', $scope.songs);
+    });
+
+    $http.get('/api/things').success(function(awesomeThings) {
+      $scope.awesomeThings = awesomeThings;
+      socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
     $scope.addData = function (add) {
@@ -56,10 +53,10 @@ angular.module('musicappApp')
       if($scope.song === '') {
         return;
       }
-      $http.post('/api/songs', { title: $scope.song.title,
-                                 words: $scope.song.words,
-                                 startKey: $scope.song.startKey,
-                                 auxKey: $scope.song.auxKey});
+      $http.post('/api/songs', { title:     $scope.song.title,
+                                 words:     $scope.song.words,
+                                 startKey:  $scope.song.startKey,
+                                 auxKey:    $scope.song.auxKey});
       $scope.song = '';
     };
 
