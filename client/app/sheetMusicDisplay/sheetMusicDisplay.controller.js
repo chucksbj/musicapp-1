@@ -13,6 +13,7 @@ angular.module('musicappApp')
     });
 
     $scope.currentSongSelected = function() {
+        selections.setSong($scope.awesomeThings[$scope.awesomeThings.length - 1]);
         $scope.songSelect = $scope.awesomeThings[$scope.awesomeThings.length - 1];
     };
 

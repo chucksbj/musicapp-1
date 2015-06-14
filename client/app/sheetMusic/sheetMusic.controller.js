@@ -7,21 +7,26 @@ angular.module('musicappApp')
     $scope.showForm = false;
     $scope.isEdit = false;
     $scope.awesomeThings = [];
-    //$scope.instrumentSelect = $rootScope.instrumentSelect;
     $scope.instrumentSelect = selections.getInstrument();
 
     $scope.gridOptions = {
         enableSorting: true,
-        enableFiltering: true,
+        enableFiltering: false,
         multiSelect: false,
-        sortInfo: {fields:['title'], directions:['asc']},
+        enableGridMenu: true,
+        enableRowSelection: true,
+        enableRowHeaderSelection: false,
+        enableColumnResizing: true,
+        rowHeight: 33,
+        
         columnDefs: [
           { field: '_id', visible: false },
-          { name: 'instrument', displayName: 'Instrument', width: 150, enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true},
+          { name: 'instrument', visible: false, displayName: 'Instrument', width: 150, enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true },
           { name: 'name', displayName: 'Song Name', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 2}, enableFiltering: true, cellTemplate: '<a href="/sheetMusicDisplay" ng-click="grid.appScope.songSelected(row.entity)" >{{row.entity.name}}</a>'},
-          { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editSheetMusic(row.entity) ">Edit</button>'},
-          { name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteSheetMusic(row.entity)" >Delete</button> '}
-        ]
+          { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.editSheetMusic(row.entity) ">Edit</a>'},
+          { name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.deleteSheetMusic(row.entity)" >Delete</a> '}
+        ],
+        filterOptions: $scope.instrumentSelect
       };
 
 
@@ -86,7 +91,7 @@ angular.module('musicappApp')
     };
 
     $scope.resize = function() {
-        return {height:(30 * $scope.gridOptions.data.length + 51)+"px"};
+        return {height:(33 * $scope.gridOptions.data.length + 51)+"px"};
     };
 
   });

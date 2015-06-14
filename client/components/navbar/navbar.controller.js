@@ -3,10 +3,6 @@
 angular.module('musicappApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    },
-    {
       'title': 'Songs',
       'link': '/song'
     },

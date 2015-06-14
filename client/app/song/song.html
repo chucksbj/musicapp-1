@@ -10,13 +10,13 @@
   <br>
 
   <div ng-hide="showForm">
-  <div ui-grid-auto-resize ng-style="resize()" ng-if="gridOptions.data.length>0" id="gridSong" ui-grid="gridOptions" class="grid" external-scopes="$scope" ui-grid-edit></div>
-  <button type="button" class="btn btn-success" ng-click="gridApi.pagination.previousPage()">
+    <div ng-if="gridOptions.data.length>0" id="gridSong" ui-grid="gridOptions" class="grid"  external-scopes="$scope" ui-grid-auto-resize ui-grid-resize-columns ui-grid-move-columns ui-grid-pinning ui-grid-selection ui-grid-exporter ng-style="resize()"></div>
+    <button type="button" class="btn btn-success" ng-click="gridApi.pagination.previousPage()">
         previous page</button>
-  <button type="button" class="btn btn-success" ng-click="gridApi.pagination.nextPage()">
+    <button type="button" class="btn btn-success" ng-click="gridApi.pagination.nextPage()">
         next page</button>
   </div>
-   PrevSong: {{prevSong}}, NextSong: {{nextSong}}
+  
   <form class="song-form" ng-submit="addSong()" name="songForm" ng-show="showForm">
     <p class="input-group">
       <label>Title</label>
@@ -33,7 +33,4 @@
       </span>
     </p>
   </form>
- 
 </div>
-
-

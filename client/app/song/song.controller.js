@@ -14,8 +14,13 @@ angular.module('musicappApp')
         //enablePagination: true,
         //enablePaginationControls: true,
         enableSorting: true,
-        enableFiltering: true,
+        enableFiltering: false,
         multiSelect: false,
+        enableGridMenu: true,
+        enableRowSelection: true,
+        enableRowHeaderSelection: false,
+        enableColumnResizing: true,
+        rowHeight: 33,
         columnDefs: [
           { field: '_id', visible: false },
           { field: 'title', displayName: 'Title', enableSorting: true, enableFiltering: true, cellTemplate: '<a href="/word" ng-click="grid.appScope.addThing(row.entity) " >{{row.entity.title}}</a>' },
@@ -79,7 +84,7 @@ angular.module('musicappApp')
     };
 
     $scope.resize = function() {
-        return {height:(30 * $scope.gridOptions.data.length + 51)+"px"};
+        return {height:(33 * $scope.gridOptions.data.length + 51)+"px"};
     };
 
     $scope.$on('$destroy', function () {

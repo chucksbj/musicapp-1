@@ -12,11 +12,16 @@ angular.module('musicappApp')
         enableSorting: true,
         enableFiltering: false,
         multiSelect: false,
+        enableGridMenu: true,
+        enableRowSelection: true,
+        enableRowHeaderSelection: false,
+        enableColumnResizing: true,
+        rowHeight: 33,
         columnDefs: [
           { field: '_id', visible: false },
           { field: 'name', displayName: 'Instrument Name', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.instrumentSelected(row.entity)" >{{row.entity.name}}</a>'},
-          { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="editBtn" type="button" class="btn btn-small" ng-click="grid.appScope.editInstrument(row.entity) ">Edit</button>'},
-          { name: 'delete', displayName: 'Delete', width: 70, enableSorting: false, enableFiltering: false, cellTemplate: '<button id="deleteBtn" type="button" class="btn btn-small" ng-click="grid.appScope.deleteInstrument(row.entity)" >Delete</button> '}
+          { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/instrument" ng-click="grid.appScope.editInstrument(row.entity) ">Edit</button>'},
+          { name: 'delete', displayName: 'Delete', width: 70, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/instrument" ng-click="grid.appScope.deleteInstrument(row.entity)" >Delete</button> '}
         ]
       };
 
@@ -72,7 +77,7 @@ angular.module('musicappApp')
 
     $scope.resize = function() {
       //For Dynamic resizing of the instrument ui-grid
-      return {height:(30 * $scope.gridOptions.data.length + 51)+"px"};
+      return {height:(33 * $scope.gridOptions.data.length + 51)+"px"};
 
     };
 
