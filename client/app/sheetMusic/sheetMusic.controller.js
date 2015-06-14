@@ -8,6 +8,7 @@ angular.module('musicappApp')
     $scope.isEdit = false;
     $scope.awesomeThings = [];
     $scope.instrumentSelect = selections.getInstrument();
+    $scope.filterOptions = {};
 
     $scope.gridOptions = {
         enableSorting: true,
@@ -26,7 +27,7 @@ angular.module('musicappApp')
           { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.editSheetMusic(row.entity) ">Edit</a>'},
           { name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.deleteSheetMusic(row.entity)" >Delete</a> '}
         ],
-        filterOptions: $scope.instrumentSelect
+        filterOptions: $scope.filterOptions
       };
 
 
@@ -50,6 +51,15 @@ angular.module('musicappApp')
       $scope.gridApi = gridApi;
     };
 
+    $scope.filterInstrument = function() {
+      var filterText = "instrument:"+$scope.instrumentSelect;
+      if ($scope.filterOptions.filterText === '') {
+        $scope.filterOptions.filterText = filterText;
+      } else {
+        $scope.filterOptions.filterText = '';
+      }
+    };
+
     $scope.addData = function (add) {
       // Show or hide the song form
       $scope.showForm = add;
@@ -60,13 +70,12 @@ angular.module('musicappApp')
         return;
       }
     	if ($scope.isEdit) {
-	    $http.put('/api/sheetMusics/' + $scope.sheetMusic._id, { name: $scope.sheetMusic.name});
-	    $scope.isEdit = false;
-	  } else {
-	  	$http.post('/api/sheetMusics',  { name: $scope.sheetMusic.name,
-                                        instrument: $scope.sheetMusic.instrument });
-	  }
-
+        $http.put('/api/sheetMusics/' + $scope.sheetMusic._id, { name: $scope.sheetMusic.name});
+        $scope.isEdit = false;
+      } else {
+        $http.post('/api/sheetMusics',  { name: $scope.sheetMusic.name,
+                                          instrument: $scope.sheetMusic.instrument });
+      }
       $scope.sheetMusic = '';
     };
 
