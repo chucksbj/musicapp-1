@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var InstrumentSchema = new Schema({
   name: String,
-  select: String,
+  folder: String,
   info: String,
   active: Boolean
 });

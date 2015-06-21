@@ -5,6 +5,7 @@ angular.module('musicappApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
     var instrument = [];
     var music = [];
+    var letter = [];
     var song = [];
 
     return {
@@ -20,11 +21,17 @@ angular.module('musicappApp')
     	setMusic: function(value) {
     		music = value;
     	},
+        getLetter: function() {
+            return letter;
+        },
+        setLetter: function(value) {
+            letter = value;
+        },
     	getSong: function() {
     		return song;
     	},
     	setSong: function(value) {
     		song = value;
-    	}
+    	},
     };
   });

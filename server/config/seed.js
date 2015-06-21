@@ -7,6 +7,7 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Instrument = require('../api/instrument/instrument.model');
 
 Thing.find({}).remove(function() {
   Thing.create( //{
@@ -51,6 +52,93 @@ User.find({}).remove(function() {
     password: 'engines1'
   },function() {
       console.log('finished populating users');
+    }
+  );
+});
+
+Instrument.find({}).remove(function() {
+  Instrument.create({
+        "name": "French Horn 2",
+        "_id": "55481854fee2aa480a426fda",
+        "__v": 0
+    },
+    {
+        "name": "Piano",
+        "_id": "554819effee2aa480a426fdc",
+        "__v": 0
+    },
+    {
+        "name": "Saxophone",
+        "_id": "554819fcfee2aa480a426fde",
+        "__v": 0
+    },
+    {
+        "name": "Tennor Sax",
+        "_id": "554819fefee2aa480a426fdf",
+        "__v": 0
+    },
+    {
+        "__v": 0,
+        "_id": "55481a01fee2aa480a426fe0",
+        "name": "Violin"
+    },
+    {
+        "name": "Flute",
+        "_id": "55481a07fee2aa480a426fe1",
+        "__v": 0
+    },
+    {
+        "name": "Bass",
+        "_id": "55481a16fee2aa480a426fe2",
+        "__v": 0
+    },
+    {
+        "name": "Trombone 1",
+        "_id": "55481a1bfee2aa480a426fe3",
+        "__v": 0
+    },
+    {
+        "name": "Trombone 2",
+        "_id": "55481a1dfee2aa480a426fe4",
+        "__v": 0
+    },
+    {
+        "name": "Trombone 3",
+        "_id": "55481a21fee2aa480a426fe5",
+        "__v": 0
+    },
+    {
+        "name": "Trumpet 1",
+        "_id": "55481a25fee2aa480a426fe6",
+        "__v": 0
+    },
+    {
+        "name": "Trumpet 2",
+        "_id": "55481a28fee2aa480a426fe7",
+        "__v": 0
+    },
+    {
+        "__v": 0,
+        "_id": "5557b9ded079a9a91dde271a",
+        "name": "French Horn 3"
+    },
+    {
+        "name": "French Horn 1",
+        "_id": "5572673f7ec45a40667e106a",
+        "__v": 0
+    },
+    {
+        "name": "Clarinet",
+        "_id": "557ba15281015137551989af",
+        "__v": 0
+    },
+    {
+        "name": "Guitar",
+        "_id": "557ba16881015137551989b0",
+        "__v": 0
+    },
+    function() {
+      console.log('finished populating instruments');
     }
   );
 });

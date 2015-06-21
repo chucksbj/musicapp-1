@@ -1,17 +1,20 @@
-'use strict';
+  'use strict';
 
 angular.module('musicappApp')
-  .controller('SheetMusicCtrl', function ($scope, $http, socket, $rootScope, uiGridConstants, selections) {
+  .controller('SheetMusicCtrl', function ($scope, $http, socket, uiGridConstants, selections) {
   	$scope.sheetMusic = {};
     $scope.sheetMusics = [];
+    $scope.letters = [];
     $scope.showForm = false;
     $scope.isEdit = false;
     $scope.awesomeThings = [];
     $scope.instrumentSelect = selections.getInstrument();
+    $scope.songSelect = selections.getSong();
     $scope.filterOptions = {};
+    $scope.letters.letter = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "SL", "SE", "BOA", "SBS"];
 
     $scope.gridOptions = {
-        enableSorting: true,
+        enableSorting: true, 
         enableFiltering: false,
         multiSelect: false,
         enableGridMenu: true,
@@ -22,16 +25,14 @@ angular.module('musicappApp')
         
         columnDefs: [
           { field: '_id', visible: false },
-          { name: 'instrument', visible: false, displayName: 'Instrument', width: 150, enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true },
+          { name: 'instrument', visible: true, displayName: 'Instrument', width: 150, enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true },
           { name: 'name', displayName: 'Song Name', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 2}, enableFiltering: true, cellTemplate: '<a href="/sheetMusicDisplay" ng-click="grid.appScope.songSelected(row.entity)" >{{row.entity.name}}</a>'},
           { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.editSheetMusic(row.entity) ">Edit</a>'},
           { name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.deleteSheetMusic(row.entity)" >Delete</a> '}
-        ],
-        filterOptions: $scope.filterOptions
+        ]
       };
 
-
-    $http.get('/api/sheetMusics').success(function(sheetMusics) {
+    $http.get('/api/sheetMusics/'+$scope.instrumentSelect.name).success(function(sheetMusics) {
       $scope.sheetMusics = sheetMusics;
       $scope.gridOptions.data = sheetMusics;
       socket.syncUpdates('sheetMusic', $scope.sheetMusics);
@@ -49,15 +50,9 @@ angular.module('musicappApp')
 
     $scope.gridOptions.onRegisterApi = function(gridApi) {
       $scope.gridApi = gridApi;
-    };
-
-    $scope.filterInstrument = function() {
-      var filterText = "instrument:"+$scope.instrumentSelect;
-      if ($scope.filterOptions.filterText === '') {
-        $scope.filterOptions.filterText = filterText;
-      } else {
-        $scope.filterOptions.filterText = '';
-      }
+      //gridApi.selection.on.rowSelectionChanged($scope, function(rows) {
+      //  $scope.songSelected = gridApi.selection.getSelectedRows(rows);
+      //});
     };
 
     $scope.addData = function (add) {
@@ -70,7 +65,8 @@ angular.module('musicappApp')
         return;
       }
     	if ($scope.isEdit) {
-        $http.put('/api/sheetMusics/' + $scope.sheetMusic._id, { name: $scope.sheetMusic.name});
+        $http.put('/api/sheetMusics/' + $scope.sheetMusic._id, { name: $scope.sheetMusic.name,
+                                                                instrument: $scope.sheetMusic.instrument });
         $scope.isEdit = false;
       } else {
         $http.post('/api/sheetMusics',  { name: $scope.sheetMusic.name,
@@ -92,15 +88,17 @@ angular.module('musicappApp')
 
     $scope.songSelected = function(entity) {
         selections.setSong(entity);
-        //$rootScope.songSelect = entity;
     };
 
     $scope.currentSongSelected = function() {
-        $rootScope.songSelect = $scope.awesomeThings[$scope.awesomeThings.length - 1];
+        selections.setSong($scope.awesomeThings[$scope.awesomeThings.length - 1]);
     };
+
+    
 
     $scope.resize = function() {
-        return {height:(33 * $scope.gridOptions.data.length + 51)+"px"};
+        return {height:(33 * $scope.gridOptions.data.length + 51)+'px'};
     };
-
+  
   });
+                                                      

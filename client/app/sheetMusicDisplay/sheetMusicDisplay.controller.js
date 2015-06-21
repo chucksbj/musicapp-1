@@ -4,8 +4,12 @@ angular.module('musicappApp')
   .controller('SheetMusicDisplayCtrl', function ($scope, $http, socket, $rootScope, selections) {
     $scope.sheetMusicDisplay = {};
     $scope.sheetMusicDisplays = [];
+    $scope.folder = {};
+    $scope.directory = {};
     $scope.instrumentSelect = selections.getInstrument();
+    $scope.folder.name = $scope.instrumentSelect.name.replace(/\s+/g,'');
     $scope.songSelect = selections.getSong();
+    $scope.directory.name = "./assets/images/"+$scope.folder.name+"/A/"+$scope.songSelect.name+".jpg";
 
     $http.get('/api/things').success(function(awesomeThings) {
     	$scope.awesomeThings = awesomeThings;

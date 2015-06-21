@@ -20,6 +20,7 @@ angular.module('musicappApp')
         columnDefs: [
           { field: '_id', visible: false },
           { field: 'name', displayName: 'Instrument Name', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.instrumentSelected(row.entity)" >{{row.entity.name}}</a>'},
+          { field: 'folder', displayName: 'Folder Name', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true },
           { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/instrument" ng-click="grid.appScope.editInstrument(row.entity) ">Edit</button>'},
           { name: 'delete', displayName: 'Delete', width: 70, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/instrument" ng-click="grid.appScope.deleteInstrument(row.entity)" >Delete</button> '}
         ]
@@ -40,6 +41,9 @@ angular.module('musicappApp')
 
     $scope.gridOptions.onRegisterApi = function(gridApi) {
       $scope.gridApi = gridApi;
+      //gridApi.selection.on.rowSelectionChanged($scope, function(rows) {
+      //  $scope.instrumentSelected = gridApi.selection.getSelectedRows();
+      //});
     };
 
     $scope.addData = function (add) {
@@ -52,10 +56,14 @@ angular.module('musicappApp')
         return;
       }
       if ($scope.isEdit) {
-        $http.put('/api/instruments/'+$scope.instrument._id, { name: $scope.instrument.name});
+        $scope.instrument.folder = $scope.instrument.name.replace(/\s+/g,'');
+        $http.put('/api/instruments/'+$scope.instrument._id, { name: $scope.instrument.name,
+                                                                folder: $scope.instrument.folder});
         $scope.isEdit = false;
       } else {
-        $http.post('/api/instruments', { name: $scope.instrument.name});
+        $scope.instrument.folder = $scope.instrument.name.replace(/\s+/g,'');
+        $http.post('/api/instruments', { name: $scope.instrument.name,
+                                          folder: $scope.instrument.folder});
       }
       $scope.instrument = '';
     };
@@ -77,7 +85,7 @@ angular.module('musicappApp')
 
     $scope.resize = function() {
       //For Dynamic resizing of the instrument ui-grid
-      return {height:(33 * $scope.gridOptions.data.length + 51)+"px"};
+      return {height:(33 * $scope.gridOptions.data.length + 51)+'px'};
 
     };
 

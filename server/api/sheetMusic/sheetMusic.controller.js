@@ -5,7 +5,7 @@ var SheetMusic = require('./sheetMusic.model');
 
 // Get list of sheetMusics
 exports.index = function(req, res) {
-  SheetMusic.find(function (err, sheetMusics) {
+  SheetMusic.find(function(err, sheetMusics) {
     if(err) { return handleError(res, err); }
     return res.json(200, sheetMusics);
   });
@@ -14,6 +14,15 @@ exports.index = function(req, res) {
 // Get a single sheetMusic
 exports.show = function(req, res) {
   SheetMusic.findById(req.params.id, function (err, sheetMusic) {
+    if(err) { return handleError(res, err); }
+    if(!sheetMusic) { return res.send(404); }
+    return res.json(sheetMusic);
+  });
+};
+
+// Get sheetMusic by instrument
+exports.instrument = function(req, res) {
+  SheetMusic.findByInstrument(req.params.instrument, function (err, sheetMusic) {
     if(err) { return handleError(res, err); }
     if(!sheetMusic) { return res.send(404); }
     return res.json(sheetMusic);

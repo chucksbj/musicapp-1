@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('musicappApp')
-  .controller('SongCtrl', function ($scope, $http, $log, socket, selections) {
+  .controller('SongCtrl', function ($scope, $http, $log, socket) {
 
     $scope.song = {};
     $scope.songs = [];
@@ -84,7 +84,7 @@ angular.module('musicappApp')
     };
 
     $scope.resize = function() {
-        return {height:(33 * $scope.gridOptions.data.length + 51)+"px"};
+        return {height:(33 * $scope.gridOptions.data.length + 51)+'px'};
     };
 
     $scope.$on('$destroy', function () {
