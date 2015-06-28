@@ -20,7 +20,6 @@ angular.module('musicappApp')
         columnDefs: [
           { field: '_id', visible: false },
           { field: 'name', displayName: 'Instrument Name', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.instrumentSelected(row.entity)" >{{row.entity.name}}</a>'},
-          { field: 'folder', displayName: 'Folder Name', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true },
           { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/instrument" ng-click="grid.appScope.editInstrument(row.entity) ">Edit</button>'},
           { name: 'delete', displayName: 'Delete', width: 70, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/instrument" ng-click="grid.appScope.deleteInstrument(row.entity)" >Delete</button> '}
         ]

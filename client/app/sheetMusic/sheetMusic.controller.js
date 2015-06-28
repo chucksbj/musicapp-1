@@ -10,6 +10,8 @@ angular.module('musicappApp')
     $scope.awesomeThings = [];
     $scope.instrumentSelect = selections.getInstrument();
     $scope.songSelect = selections.getSong();
+    $scope.letterSelect = selections.getLetter();
+    //$scope.letterSelect = "A"
     $scope.filterOptions = {};
     $scope.letters.letter = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "SL", "SE", "BOA", "SBS"];
 
@@ -87,14 +89,17 @@ angular.module('musicappApp')
     };
 
     $scope.songSelected = function(entity) {
-        selections.setSong(entity);
+      selections.setSong(entity);
     };
 
     $scope.currentSongSelected = function() {
-        selections.setSong($scope.awesomeThings[$scope.awesomeThings.length - 1]);
+      selections.setSong($scope.awesomeThings[$scope.awesomeThings.length - 1]);
     };
 
-    
+    $scope.letterSelected = function(value) {
+      $scope.letterSelect = value;
+      selections.setLetter(value);
+    }
 
     $scope.resize = function() {
         return {height:(33 * $scope.gridOptions.data.length + 51)+'px'};

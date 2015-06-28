@@ -10,8 +10,9 @@
 
 	 	<span ng-if="instrumentSelect.name" ng-hide="showForm">Instrument Selected: {{instrumentSelect.name}}</span>
 	 	<span ng-if="songSelect.name" ng-hide="showForm">Song Selected: {{songSelect.name}}</span>
+	 	<span ng-hide="showForm">Letter Selected: {{letterSelect}}</span>
 	 	<table><tr>
-	 	<td ng-repeat="letter in letters.letter"><button class="btn" ng-click="letterSelect()">{{letter}}</button></td>
+	 	<td ng-repeat="letter in letters.letter"><button class="btn" ng-click="$parent.letterSelected(letter)">{{letter}}</button></td>
 	 	</tr></table>
 
   	<div ng-if="gridOptions.data.length>0" id="gridSheetMusic" ui-grid="gridOptions" class="grid" external-scopes="$scope" ui-grid-auto-resize ui-grid-resize-columns ui-grid-move-columns ui-grid-pinning ui-grid-selection ui-grid-exporter ng-style="resize()" ng-hide="showForm">
