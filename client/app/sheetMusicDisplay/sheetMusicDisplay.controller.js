@@ -10,7 +10,7 @@ angular.module('musicappApp')
     $scope.folder.name = $scope.instrumentSelect.name.replace(/\s+/g,'');
     $scope.songSelect = selections.getSong();
     $scope.letterSelect = selections.getLetter();
-    $scope.directory.name = "./assets/images/"+$scope.folder.name+"/A/"+$scope.songSelect.name+".jpg";
+    $scope.directory.name = "./assets/images/"+$scope.folder.name+"/"+$scope.letterSelect+"/"+$scope.songSelect.name+".jpg";
 
     $http.get('/api/things').success(function(awesomeThings) {
     	$scope.awesomeThings = awesomeThings;
