@@ -7,7 +7,7 @@
 	<br>
 	<span>Letter Selected: {{letterSelect}}</span>
 	<br>
-	<span>{{directory.name}}</span>
+	<span>Directory of Image: {{directory.name}}</span>
 	<a id="nextSong" class="nav nav-tabs nav-stacked col-md-2 col-lg-2 col-sm-1" ng-hide="showForm" ng-repeat="thing in awesomeThings | limitTo:-1" ng-click="currentSongSelected()" href="/sheetMusicDisplay">Next Song: {{thing.name}}</a>
 	<br>
 	<img src="./assets/images/{{folder.name}}/{{letterSelect}}/{{songSelect.name}}.jpg" />

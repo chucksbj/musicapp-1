@@ -18,8 +18,11 @@ angular.module('musicappApp')
     });
 
     $scope.currentSongSelected = function() {
-        selections.setSong($scope.awesomeThings[$scope.awesomeThings.length - 1]);
         $scope.songSelect = $scope.awesomeThings[$scope.awesomeThings.length - 1];
+        selections.setSong($scope.songSelect);
+        var strLength = 0 - $scope.songSelect.name.length + 1;
+        $scope.letterSelect = $scope.songSelect.name.slice(0, strLength);
+        selections.setLetter($scope.letterSelect);
     };
 
   });
