@@ -11,6 +11,10 @@ angular.module('musicappApp')
     $scope.instrumentSelect = selections.getInstrument();
     $scope.songSelect = selections.getSong();
     $scope.letterSelect = selections.getLetter();
+    if($scope.letterSelect == "") {
+      $scope.letterSelect = "A";
+      selections.setLetter("A");
+    }
     $scope.letters.letter = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "SL", "SE", "BOA", "SBS"];
 
     $scope.gridOptions = {
@@ -27,7 +31,7 @@ angular.module('musicappApp')
         
         columnDefs: [
           { field: '_id', visible: false },
-          { name: 'instrument', visible: true, displayName: 'Instrument', width: 150, enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true },
+          //{ name: 'instrument', visible: true, displayName: 'Instrument', width: 150, enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 1}, enableFiltering: true },
           { name: 'name', displayName: 'Song Name', enableSorting: true, sort: {direction: uiGridConstants.ASC , priority: 2}, enableFiltering: true, cellTemplate: '<a href="/sheetMusicDisplay" ng-click="grid.appScope.songSelected(row.entity)" >{{row.entity.name}}</a>'},
           { name: 'edit', displayName: 'Edit', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.editSheetMusic(row.entity) ">Edit</a>'},
           { name: 'delete', displayName: 'Delete', width: 65, enableSorting: false, enableFiltering: false, cellTemplate: '<a href="/sheetMusic" ng-click="grid.appScope.deleteSheetMusic(row.entity)" >Delete</a> '}
@@ -46,7 +50,7 @@ angular.module('musicappApp')
       socket.syncUpdates('instrument', $scope.instruments);
     });
 
-    //gets 'things' database entries, used for next song in place of song list
+    //gets 'things' (default) database entries, used for next song next song up selection
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
@@ -129,4 +133,3 @@ angular.module('musicappApp')
     };
   
   });
-                                                      

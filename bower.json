@@ -1,27 +1,27 @@
 {
   "name": "musicapp",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "dependencies": {
-    "angular": ">=1.2.*",
-    "json3": "~3.3.1",
-    "es5-shim": "~3.0.1",
-    "jquery": "~1.11.0",
-    "bootstrap": "~3.1.1",
-    "angular-resource": ">=1.2.*",
-    "angular-cookies": ">=1.2.*",
-    "angular-sanitize": ">=1.2.*",
+    "angular": ">=1.4.3",
+    "angular-resource": ">=1.4.3",
+    "angular-cookies": ">=1.4.3",
+    "angular-sanitize": ">=1.4.3",
     "angular-bootstrap": "~0.11.0",
-    "font-awesome": ">=4.1.0",
-    "lodash": "~2.4.1",
     "angular-socket-io": "~0.6.0",
     "angular-ui-router": "~0.2.10",
-    "angular-ui-grid": "~3.0.0-rc.20"
+    "angular-ui-grid": "~3.0.0-rc.20",
+    "bootstrap": "~3.1.1",
+    "es5-shim": "~3.0.1",
+    "json3": "~3.3.1",
+    "jquery": "~1.11.0",
+    "font-awesome": ">=4.1.0",
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
     "angular-scenario": ">=1.2.*"
   },
   "resolutions": {
-    "angular": ">= 1.0.8"
+    "angular": "1.4.3"
   }
 }

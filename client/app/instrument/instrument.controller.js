@@ -11,7 +11,7 @@ angular.module('musicappApp')
     $scope.gridOptions = {
         enableSorting: true,
         enableFiltering: false,
-        multiSelect: false,
+        multiSelect: false, 
         enableGridMenu: true,
         enableRowSelection: true,
         enableRowHeaderSelection: false,
@@ -32,7 +32,7 @@ angular.module('musicappApp')
       socket.syncUpdates('instrument', $scope.instruments);
     });
 
-    //"things" Database access and asyncronous updates (used to display the next song up)
+    //"things" (default) Database access and asyncronous updates (used to display the next song up)
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
@@ -40,9 +40,10 @@ angular.module('musicappApp')
 
     $scope.gridOptions.onRegisterApi = function(gridApi) {
       $scope.gridApi = gridApi;
-      //gridApi.selection.on.rowSelectionChanged($scope, function(rows) {
-      //  $scope.instrumentSelected = gridApi.selection.getSelectedRows();
-      //});
+      
+      gridApi.selection.on.rowSelectionChanged($scope, function(row) {
+        $scope.instrumentSelect = row.isSelected;
+      });
     };
 
     $scope.addData = function (add) {
@@ -85,7 +86,6 @@ angular.module('musicappApp')
     $scope.resize = function() {
       //For Dynamic resizing of the instrument ui-grid
       return {height:(33 * $scope.gridOptions.data.length + 51)+'px'};
-
     };
 
     $scope.$on('$destroy', function () {
